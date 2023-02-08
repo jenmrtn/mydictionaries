@@ -17,3 +17,28 @@ Display report for all universities that have a total price for in-state student
 
 
 """
+import json
+
+infile = open('school_data.json', 'r')
+
+schools = json.load(infile)
+conference_schools = [372, 108, 107, 130]
+print(type(schools))
+
+# How many schools are in this file?
+print(len(schools))
+# Name of school graduation rate, and above 80%
+
+for i in schools:
+    if i['NCAA']['NAIA conference number football (IC2020)'] in conference_schools:
+        if i["Graduation rate  women (DRVGR2020)"] > 80:
+            print(i['instnm'], ':')
+            print(i["Graduation rate  women (DRVGR2020)"], '%')
+
+for i in schools:
+    if i['NCAA']['NAIA conference number football (IC2020)'] in conference_schools:
+        if i["Total price for in-state students living off campus (not with family)  2020-21 (DRVIC2020)"] is not None:
+            if i["Total price for in-state students living off campus (not with family)  2020-21 (DRVIC2020)"] > 50000:
+                print(i['instnm'], ':')
+                print(
+                    i["Total price for in-state students living off campus (not with family)  2020-21 (DRVIC2020)"])
